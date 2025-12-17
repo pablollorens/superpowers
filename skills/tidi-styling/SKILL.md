@@ -85,10 +85,56 @@ src/[Project]/Theme/[Name]Theme/Resources/assets/less/
 
 **Register new files in style.less:**
 ```less
-/* Add under the appropriate "ACE - OVERWRITE" section */
+/* Add under the appropriate "[PROJECT_CODE] - OVERWRITE" section */
 
-/* -----[ ACE - OVERWRITE ]----- */
+/* -----[ PROJECT_CODE - OVERWRITE ]----- */
 @import "6-1-components/_c-your-new-component";
+```
+
+## File Header Format
+
+**MANDATORY: ASK for the Jira project code before writing file headers.**
+
+Every LESS file must start with a standardized header comment. The project code (e.g., ACE, RIS) comes from the Jira project key.
+
+**BEFORE writing any file header, ask the user:**
+> "What is the Jira project code for this project? (e.g., ACE, RIS, etc.)"
+
+Do NOT assume or copy from other files - project codes vary between projects and incorrect codes cause confusion.
+
+**Header format:**
+```less
+/*
+ * -----------------------------------------------------------------------------
+ * [PROJECT_CODE] X.X - SECTION - NAME
+ * -----------------------------------------------------------------------------
+ */
+```
+
+**Section codes by folder:**
+| Folder | Section Code | Example Header |
+|--------|--------------|----------------|
+| 1-settings | 1.0 | `[XXX] 1.0 - SETTINGS - COLORS` |
+| 2-tools | 2.0 | `[XXX] 2.0 - TOOLS - MIXINS` |
+| 6-0-global | 6.0 | `[XXX] 6.0 - GLOBAL - TYPOGRAPHY` |
+| 6-1-components | 6.1 | `[XXX] 6.1 - COMPONENTS - BUTTON` |
+| 6-2-modules | 6.2 | `[XXX] 6.2 - MODULES - NEWS` |
+| 6-3-widgets | 6.3 | `[XXX] 6.3 - WIDGETS - FEATURED PRODUCTS` |
+| 7-utilities | 7.0 | `[XXX] 7.0 - UTILITIES - SPACING` |
+
+*(Replace `XXX` with the actual Jira project code obtained from the user)*
+
+**Example for a widget:**
+```less
+/*
+ * -----------------------------------------------------------------------------
+ * [PROJECT_CODE] 6.3 - WIDGETS - WIDGET NAME
+ * -----------------------------------------------------------------------------
+ */
+
+.w-widget-name {
+    // styles...
+}
 ```
 
 ## ITCSS Layer Reference
@@ -197,6 +243,8 @@ grunt watch    # Watch mode during development
 
 Before considering styling work complete:
 
+- [ ] **Asked for Jira project code** (do NOT assume or copy from other files)
+- [ ] File header uses correct project code format: `[PROJECT_CODE] X.X - SECTION - NAME`
 - [ ] Read budspencer tooling files first
 - [ ] Read project theme tooling files
 - [ ] Used existing mixins/variables where possible
@@ -217,7 +265,7 @@ Before considering styling work complete:
 | Hardcoded spacing `padding: 20px` | Use `.vertical-whitespace()` or `@grid-gutter-*` |
 | Nested BEM `&__element` | Flatten: `.block__element {}` |
 | New file in budspencer | Move to `src/` project theme |
-| Missing import | Add to `style.less` under ACE - OVERWRITE |
+| Missing import | Add to `style.less` under `[PROJECT_CODE] - OVERWRITE` section |
 | Unknown mixin that looks useful | Ask user before proceeding |
 
 ## Reference
